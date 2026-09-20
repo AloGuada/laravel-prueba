@@ -15,8 +15,10 @@ class ProductController extends Controller
     // =========================
     public function index(): Response
     {
-        // Traer datos desde la tabla products
-        $products = Product::latest()->get();
+        // Traer productos junto con su categoría
+        $products = Product::with('category')
+            ->latest()
+            ->get();
 
         return Inertia::render('Products/Index', [
             'products' => $products,
@@ -67,14 +69,12 @@ class ProductController extends Controller
 
 
     // =========================
-    // ACTUALIZAR PRODUCTO EDITAR
+    // ACTUALIZAR PRODUCTO
     // =========================
     public function update(StoreProductRequest $request, Product $product)
     {
-        // Modificar el producto en la base de datos
         $product->update($request->validated());
 
-        // Regresar a la página de productos
         return redirect()
             ->route('products.index')
             ->with('success', 'Producto actualizado correctamente.');
@@ -84,12 +84,14 @@ class ProductController extends Controller
     // =========================
     // VER DETALLES
     // =========================
-    public function show(Product $product): Response
-    {
-        return Inertia::render('Products/Show', [
-            'product' => $product,
-        ]);
-    }
+   public function show(Product $product): Response
+{
+    $product->load('category');
+
+    return Inertia::render('Products/Show', [
+        'product' => $product,
+    ]);
+}
 
 
     // =========================

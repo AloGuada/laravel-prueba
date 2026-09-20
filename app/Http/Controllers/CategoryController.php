@@ -14,7 +14,7 @@ class CategoryController extends Controller
     // =========================
     public function index(): Response
     {
-        $categories = Category::latest()->get();
+        $categories = Category::with('products')->get();
 
         return Inertia::render('Categories/Index', [
             'categories' => $categories,
@@ -49,7 +49,7 @@ class CategoryController extends Controller
         ]);
 
         return redirect()
-            ->route('products.index')
+            ->route('categories.index')
             ->with('success', 'Categoría creada correctamente.');
     }
 
@@ -59,6 +59,8 @@ class CategoryController extends Controller
     // =========================
     public function show(Category $category): Response
     {
+        $category->load('products');
+
         return Inertia::render('Categories/Show', [
             'category' => $category,
         ]);
@@ -94,7 +96,7 @@ class CategoryController extends Controller
         ]);
 
         return redirect()
-            ->route('products.index')
+            ->route('categories.index')
             ->with('success', 'Categoría actualizada correctamente.');
     }
 
@@ -107,7 +109,7 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()
-            ->route('products.index')
+            ->route('categories.index')
             ->with('success', 'Categoría eliminada correctamente.');
     }
 }

@@ -58,6 +58,17 @@ export default function AuthenticatedLayout({
                             Productos
                         </Link>
 
+                        
+                          {/* CATEGORIA */}
+                        <Link
+                            href="/categories"
+                            className="flex rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+                        >
+                            Categoria
+                        </Link>
+
+                        
+
                     </div>
 
                 </aside>

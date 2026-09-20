@@ -4,9 +4,9 @@ import { Head, Link } from '@inertiajs/react';
 export default function Show({ product }) {
 
     return (
-        <AuthenticatedLayout title="Product Details">
+        <AuthenticatedLayout title="Detalles">
 
-            <Head title="Product Details" />
+            <Head title="Producto de Detalles" />
 
             <div className="mx-auto max-w-3xl">
 
@@ -62,6 +62,19 @@ export default function Show({ product }) {
 
                         <p className="mt-1 text-base text-slate-800">
                             {product.description || 'Sin descripción'}
+                        </p>
+
+                    </div>
+
+                     {/* CATEGORIA */}
+                    <div className="border-b border-slate-200 p-5">
+
+                        <p className="text-sm text-slate-500">
+                            Categoría
+                        </p>
+
+                        <p className="mt-1 text-lg font-semibold text-slate-900">
+                            {product.category?.name || 'Sin categoría'}
                         </p>
 
                     </div>

@@ -34,7 +34,6 @@ export default function Index({ products = [] }) {
                         Crear Producto
                     </Link>
 
-
                     {/* CREAR CATEGORÍA */}
                     <Link
                         href={route('categories.create')}
@@ -47,7 +46,7 @@ export default function Index({ products = [] }) {
 
 
                 {/* =========================
-                    TABLA
+                    TABLA DE PRODUCTOS
                 ========================== */}
                 <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
 
@@ -55,31 +54,44 @@ export default function Index({ products = [] }) {
 
                         <table className="w-full text-left">
 
-                            {/* ENCABEZADOS */}
+                            {/* =========================
+                                ENCABEZADOS
+                            ========================== */}
                             <thead className="border-b border-slate-200 bg-slate-50">
 
                                 <tr>
 
+                                    {/* ID */}
                                     <th className="px-5 py-3 text-xs font-semibold text-slate-500">
                                         ID
                                     </th>
 
+                                    {/* PRODUCTO */}
                                     <th className="px-5 py-3 text-xs font-semibold text-slate-500">
                                         Producto
                                     </th>
 
+                                    {/* DESCRIPCIÓN */}
                                     <th className="px-5 py-3 text-xs font-semibold text-slate-500">
-                                        Descripcion
+                                        Descripción
                                     </th>
 
+                                    {/* STOCK */}
                                     <th className="px-5 py-3 text-xs font-semibold text-slate-500">
                                         Stock
                                     </th>
 
+                                    {/* PRECIO */}
                                     <th className="px-5 py-3 text-xs font-semibold text-slate-500">
                                         Precio
                                     </th>
 
+                                    {/* CATEGORÍA */}
+                                    <th className="px-5 py-3 text-xs font-semibold text-slate-500">
+                                        Categoría
+                                    </th>
+
+                                    {/* ACCIONES */}
                                     <th className="px-5 py-3 text-right text-xs font-semibold text-slate-500">
                                         Acciones
                                     </th>
@@ -103,28 +115,51 @@ export default function Index({ products = [] }) {
                                             className="hover:bg-slate-50"
                                         >
 
+                                            {/* =========================
+                                                ID
+                                            ========================== */}
                                             <td className="px-5 py-3 text-sm text-slate-600">
                                                 {product.id}
                                             </td>
 
 
+                                            {/* =========================
+                                                PRODUCTO
+                                            ========================== */}
                                             <td className="px-5 py-3 text-sm font-medium text-slate-800">
                                                 {product.name}
                                             </td>
 
 
+                                            {/* =========================
+                                                DESCRIPCIÓN
+                                            ========================== */}
                                             <td className="px-5 py-3 text-sm text-slate-600">
                                                 {product.description || '-'}
                                             </td>
 
 
+                                            {/* =========================
+                                                STOCK
+                                            ========================== */}
                                             <td className="px-5 py-3 text-sm text-slate-600">
                                                 {product.stock}
                                             </td>
 
 
+                                            {/* =========================
+                                                PRECIO
+                                            ========================== */}
                                             <td className="px-5 py-3 text-sm text-slate-600">
                                                 ${Number(product.price).toFixed(2)}
+                                            </td>
+
+
+                                            {/* =========================
+                                                CATEGORÍA
+                                            ========================== */}
+                                            <td className="px-5 py-3 text-sm text-slate-600">
+                                                {product.category?.name || '-'}
                                             </td>
 
 
@@ -135,24 +170,25 @@ export default function Index({ products = [] }) {
 
                                                 <div className="flex justify-end gap-2">
 
-                                                    {/* VER DETALLES */}
+                                                    {/* DETALLES */}
                                                     <Link
                                                         href={route(
                                                             'products.show',
                                                             product.id
                                                         )}
-                                                        className="rounded-md bg-slate-500 px-3 py-2 text-xs font-medium text-white hover:bg-slate-600"
+                                                        className="rounded-md bg-slate-500 px-3 py-2 text-xs font-medium text-white transition hover:bg-slate-600"
                                                     >
                                                         Detalles
                                                     </Link>
 
 
-                                                    {/* BORRAR */}
+                                                    {/* ELIMINAR */}
                                                     <button
+                                                        type="button"
                                                         onClick={() =>
                                                             deleteProduct(product)
                                                         }
-                                                        className="rounded-md bg-red-600 px-3 py-2 text-xs font-medium text-white hover:bg-red-700"
+                                                        className="rounded-md bg-red-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-red-700"
                                                     >
                                                         Eliminar
                                                     </button>
@@ -167,10 +203,13 @@ export default function Index({ products = [] }) {
 
                                 ) : (
 
+                                    /* =========================
+                                        SIN PRODUCTOS
+                                    ========================== */
                                     <tr>
 
                                         <td
-                                            colSpan="6"
+                                            colSpan="7"
                                             className="px-5 py-12 text-center text-sm text-slate-500"
                                         >
                                             No hay productos registrados.
