@@ -70,6 +70,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/categories', [CategoryController::class, 'index'])
         ->name('categories.index');
 
+    // EXPORTAR CATEGORÍAS A PDF
+    Route::get('/categories/pdf', [CategoryController::class, 'pdf'])
+        ->name('categories.pdf');
+
     // CREAR CATEGORÍA
     Route::get('/categories/create', [CategoryController::class, 'create'])
         ->name('categories.create');

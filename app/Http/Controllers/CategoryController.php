@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CategoryController extends Controller
 {
@@ -19,6 +20,21 @@ class CategoryController extends Controller
         return Inertia::render('Categories/Index', [
             'categories' => $categories,
         ]);
+    }
+
+
+    // =========================
+    // EXPORTAR CATEGORÍAS A PDF
+    // =========================
+    public function pdf()
+    {
+        $categories = Category::with('products')->get();
+
+        $pdf = Pdf::loadView('categories.pdf', [
+            'categories' => $categories,
+        ]);
+
+        return $pdf->download('categorias.pdf');
     }
 
 

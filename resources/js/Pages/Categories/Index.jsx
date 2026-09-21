@@ -23,12 +23,28 @@ export default function Index({ categories }) {
                         </p>
                     </div>
 
-                    <Link
-                        href={route('categories.create')}
-                        className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-                    >
-                        + Nueva categoría
-                    </Link>
+
+                    {/* BOTONES */}
+                    <div className="flex gap-3">
+
+                        {/* EXPORTAR PDF */}
+                        <a
+                            href={route('categories.pdf')}
+                            className="rounded-md bg-slate-700 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
+                        >
+                            Exportar PDF
+                        </a>
+
+
+                        {/* NUEVA CATEGORÍA */}
+                        <Link
+                            href={route('categories.create')}
+                            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                        >
+                            + Nueva categoría
+                        </Link>
+
+                    </div>
 
                 </div>
 
@@ -39,6 +55,7 @@ export default function Index({ categories }) {
                     {categories.length === 0 ? (
 
                         <div className="rounded-lg border border-slate-200 bg-white p-8 text-center">
+
                             <p className="text-sm text-slate-500">
                                 No hay categorías registradas.
                             </p>
@@ -49,6 +66,7 @@ export default function Index({ categories }) {
                             >
                                 Crear primera categoría
                             </Link>
+
                         </div>
 
                     ) : (
@@ -64,6 +82,7 @@ export default function Index({ categories }) {
                                 <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-6 py-4">
 
                                     <div>
+
                                         <h2 className="text-lg font-semibold text-slate-900">
                                             {category.name}
                                         </h2>
@@ -74,6 +93,7 @@ export default function Index({ categories }) {
                                                 ? 'producto'
                                                 : 'productos'}
                                         </p>
+
                                     </div>
 
                                 </div>
@@ -87,6 +107,7 @@ export default function Index({ categories }) {
                                         <table className="min-w-full divide-y divide-slate-200">
 
                                             <thead className="bg-white">
+
                                                 <tr>
 
                                                     <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
@@ -106,6 +127,7 @@ export default function Index({ categories }) {
                                                     </th>
 
                                                 </tr>
+
                                             </thead>
 
 
