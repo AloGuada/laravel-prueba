@@ -45,6 +45,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/products', [ProductController::class, 'store'])
         ->name('products.store');
 
+    // EXPORTAR PRODUCTOS A PDF
+    Route::get('/products/pdf', [ProductController::class, 'pdf'])
+        ->name('products.pdf');
+
     // EDITAR PRODUCTO
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])
         ->name('products.edit');
@@ -69,10 +73,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // VER TODAS LAS CATEGORÍAS
     Route::get('/categories', [CategoryController::class, 'index'])
         ->name('categories.index');
-
-    // EXPORTAR CATEGORÍAS A PDF
-    Route::get('/categories/pdf', [CategoryController::class, 'pdf'])
-        ->name('categories.pdf');
 
     // CREAR CATEGORÍA
     Route::get('/categories/create', [CategoryController::class, 'create'])

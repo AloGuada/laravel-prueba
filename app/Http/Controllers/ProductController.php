@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Models\Category;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,7 +16,6 @@ class ProductController extends Controller
     // =========================
     public function index(): Response
     {
-        // Traer productos junto con su categoría
         $products = Product::with('category')
             ->latest()
             ->get();
@@ -27,11 +27,27 @@ class ProductController extends Controller
 
 
     // =========================
+    // EXPORTAR PRODUCTOS A PDF
+    // =========================
+    public function pdf()
+    {
+        $products = Product::with('category')
+            ->latest()
+            ->get();
+
+        $pdf = Pdf::loadView('products.pdf', [
+            'products' => $products,
+        ]);
+
+        return $pdf->download('productos.pdf');
+    }
+
+
+    // =========================
     // MOSTRAR FORMULARIO CREAR
     // =========================
     public function create(): Response
     {
-        // Obtener todas las categorías
         $categories = Category::all();
 
         return Inertia::render('Products/Create', [
@@ -58,7 +74,6 @@ class ProductController extends Controller
     // =========================
     public function edit(Product $product): Response
     {
-        // Obtener todas las categorías
         $categories = Category::all();
 
         return Inertia::render('Products/Edit', [
@@ -84,14 +99,14 @@ class ProductController extends Controller
     // =========================
     // VER DETALLES
     // =========================
-   public function show(Product $product): Response
-{
-    $product->load('category');
+    public function show(Product $product): Response
+    {
+        $product->load('category');
 
-    return Inertia::render('Products/Show', [
-        'product' => $product,
-    ]);
-}
+        return Inertia::render('Products/Show', [
+            'product' => $product,
+        ]);
+    }
 
 
     // =========================

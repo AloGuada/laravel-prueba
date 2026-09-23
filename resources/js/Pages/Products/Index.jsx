@@ -34,13 +34,13 @@ export default function Index({ products = [] }) {
                         Crear Producto
                     </Link>
 
-                    {/* CREAR CATEGORÍA */}
-                    <Link
-                        href={route('categories.create')}
-                        className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
-                    >
-                        Crear Categoría
-                    </Link>
+                    {/* EXPORTAR PDF */} 
+                        <a
+                            href={route('products.pdf')}
+                            className="rounded-md bg-slate-700 px-3 py-2 text-xs font-medium text-white hover:bg-slate-800"
+                        >
+                            Exportar PDF
+                        </a>
 
                 </div>
 
